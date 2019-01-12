@@ -10,7 +10,7 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 
 @Component
-public class IntervalsCalculator {
+class IntervalsCalculator {
     /**
      * Return the list of intervals to be later filled with water.
      * @param array input array, not null
