@@ -34,6 +34,7 @@ test {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
     compile 'com.google.code.findbugs:jsr305:3.0.1'
     compile group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1'
     compile 'com.google.guava:guava:27.0.1-jre'

@@ -13,6 +13,16 @@ import static java.lang.String.format;
 @Component
 class WaterFiller {
 
+    /**
+     * Fills the water.
+     *
+     * This method could be made concurrent, but performance tests show that there is literally no difference
+     * between filling an array of one million and ten millions - the bottleneck is in intervalsCalculator which
+     * is quite complex to split.
+     * @param sourceArray input array
+     * @param intervalsToFill intervals to fill
+     * @return result of filling
+     */
     RainResult fillWater(int[] sourceArray, List<Interval> intervalsToFill) {
 
         validateInput(sourceArray, intervalsToFill);

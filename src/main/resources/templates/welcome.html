@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Welcome to Rainy Hills application!</title>
+    <div lang="en" th:replace="fragments/header :: header"></div>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+    <h1>Hello and Welcome to Rainy Hills application!</h1>
+    <p>Please select one of ways to enter data.</p>
+</div>
+
+<div class="container">
+
+
+    <table style="width: auto;" class="table table-striped">
+        <tr>
+            <td>Quick input data with values from first task ([3, 2, 4, 1, 2])</td>
+            <td>
+                <a href="/rainyhills/rainWithTask1" class="btn btn-primary" role="button">Go</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Quick input data with values from second task ([4, 1, 1, 0, 2, 3])</td>
+            <td>
+                <a href="/rainyhills/rainWithTask2" class="btn btn-primary" role="button">Go</a>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter data with .csv file</td>
+            <td>
+                <form method="POST" enctype="multipart/form-data" action="/rainyhills/rainWithFile">
+                    <div class="form-group">
+                        <div class="btn-group-vertical">
+                            <input type="file" required class="form-control-file" name="csvFile"/>
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+
+</body>
+</html>
