@@ -21,7 +21,7 @@ public class RainyHillsController {
     private static final int[] TASK_2_ARRAY = {4, 1, 1, 0, 2, 3};
 
     @SneakyThrows
-    @PostMapping
+    @PostMapping("/rainWithFile")
     public String rainWithFile(@RequestParam("csvFile") MultipartFile csvFile, ModelMap modelMap) {
         RainResult rainResult = rainyHillsSolver.rain(csvFile);
 

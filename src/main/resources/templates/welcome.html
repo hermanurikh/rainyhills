@@ -18,13 +18,17 @@
         <tr>
             <td>Quick input data with values from first task ([3, 2, 4, 1, 2])</td>
             <td>
-                <a href="/rainyhills/rainWithTask1" class="btn btn-primary" role="button">Go</a>
+                <p class="text-right">
+                    <a href="/rainyhills/rainWithTask1" class="btn btn-primary" role="button">Go</a>
+                </p>
             </td>
         </tr>
         <tr>
             <td>Quick input data with values from second task ([4, 1, 1, 0, 2, 3])</td>
             <td>
-                <a href="/rainyhills/rainWithTask2" class="btn btn-primary" role="button">Go</a>
+                <p class="text-right">
+                    <a href="/rainyhills/rainWithTask2" class="btn btn-primary" role="button">Go</a>
+                </p>
             </td>
         </tr>
         <tr>
@@ -32,16 +36,25 @@
             <td>
                 <form method="POST" enctype="multipart/form-data" action="/rainyhills/rainWithFile">
                     <div class="form-group">
-                        <div class="btn-group-vertical">
-                            <input type="file" required class="form-control-file" name="csvFile"/>
-                            <button type="submit" class="btn btn-primary">Upload</button>
+
+
+                        <div class="input-group">
+                            <label class="input-group-btn">
+                    <span class="btn btn-default btn-file">
+                        Browse&hellip; <input type="file" style="display: none;" name="csvFile" required>
+                    </span>
+                            </label>
+                            <input type="text" class="form-control" readonly>
                         </div>
+                        <p class="text-right">
+                            <button type="submit" class="btn btn-primary" disabled>Upload</button>
+                        </p>
+
                     </div>
                 </form>
             </td>
         </tr>
     </table>
-
 
 </div>
 
