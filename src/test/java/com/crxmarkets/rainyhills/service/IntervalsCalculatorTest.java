@@ -33,7 +33,7 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(0));
+            assertThat(result.size(), is(4));
         }
 
         @Test
@@ -46,7 +46,7 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
+            assertThat(result.size(), is(4));
             assertThat(result.get(0).getFrom(), is(2));
             assertThat(result.get(0).getTo(), is(4));
         }
@@ -61,9 +61,9 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
-            assertThat(result.get(0).getFrom(), is(2));
-            assertThat(result.get(0).getTo(), is(4));
+            assertThat(result.size(), is(4));
+            assertThat(result.get(0).getFrom(), is(4));
+            assertThat(result.get(0).getTo(), is(2));
         }
 
         @Test
@@ -76,24 +76,9 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
+            assertThat(result.size(), is(5));
             assertThat(result.get(0).getFrom(), is(1));
             assertThat(result.get(0).getTo(), is(5));
-        }
-
-        @Test
-        @DisplayName("when there is a peak in middle which is the end of interval")
-        void calculate_success_peakInMiddleShouldBeEnd() {
-            //given
-            int[] inputArray = {2, 1, 3, 2, 1};
-
-            //when
-            List<Interval> result = intervalsCalculator.calculate(inputArray);
-
-            //then
-            assertThat(result.size(), is(1));
-            assertThat(result.get(0).getFrom(), is(0));
-            assertThat(result.get(0).getTo(), is(2));
         }
 
         @Test
@@ -106,11 +91,11 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(2));
-            assertThat(result.get(0).getFrom(), is(1));
+            assertThat(result.size(), is(5));
+            assertThat(result.get(0).getFrom(), is(5));
             assertThat(result.get(0).getTo(), is(3));
             assertThat(result.get(1).getFrom(), is(3));
-            assertThat(result.get(1).getTo(), is(5));
+            assertThat(result.get(1).getTo(), is(1));
         }
 
         @Test
@@ -123,24 +108,9 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
-            assertThat(result.get(0).getFrom(), is(3));
-            assertThat(result.get(0).getTo(), is(6));
-        }
-
-        @Test
-        @DisplayName("when edges are starting and ending values")
-        void calculate_success_edgesAreStartAndEnd() {
-            //given
-            int[] inputArray = {4, 1, 1, 2, 4};
-
-            //when
-            List<Interval> result = intervalsCalculator.calculate(inputArray);
-
-            //then
-            assertThat(result.size(), is(1));
-            assertThat(result.get(0).getFrom(), is(0));
-            assertThat(result.get(0).getTo(), is(4));
+            assertThat(result.size(), is(6));
+            assertThat(result.get(0).getFrom(), is(6));
+            assertThat(result.get(0).getTo(), is(3));
         }
 
         @Test
@@ -166,13 +136,11 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(3));
-            assertThat(result.get(0).getFrom(), is(2));
-            assertThat(result.get(0).getTo(), is(4));
-            assertThat(result.get(1).getFrom(), is(7));
-            assertThat(result.get(1).getTo(), is(9));
-            assertThat(result.get(2).getFrom(), is(9));
-            assertThat(result.get(2).getTo(), is(11));
+            assertThat(result.size(), is(11));
+            assertThat(result.get(0).getFrom(), is(7));
+            assertThat(result.get(0).getTo(), is(6));
+            assertThat(result.get(1).getFrom(), is(6));
+            assertThat(result.get(1).getTo(), is(5));
         }
     }
 
@@ -190,11 +158,15 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(2));
-            assertThat(result.get(0).getFrom(), is(0));
-            assertThat(result.get(0).getTo(), is(2));
-            assertThat(result.get(1).getFrom(), is(2));
+            assertThat(result.size(), is(4));
+            assertThat(result.get(0).getFrom(), is(2));
+            assertThat(result.get(0).getTo(), is(0));
+            assertThat(result.get(1).getFrom(), is(0));
             assertThat(result.get(1).getTo(), is(4));
+            assertThat(result.get(2).getFrom(), is(4));
+            assertThat(result.get(2).getTo(), is(1));
+            assertThat(result.get(3).getFrom(), is(1));
+            assertThat(result.get(3).getTo(), is(3));
         }
 
         @Test
@@ -207,7 +179,7 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
+            assertThat(result.size(), is(5));
             assertThat(result.get(0).getFrom(), is(0));
             assertThat(result.get(0).getTo(), is(5));
         }
@@ -227,11 +199,15 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(2));
-            assertThat(result.get(0).getFrom(), is(0));
+            assertThat(result.size(), is(4));
+            assertThat(result.get(0).getFrom(), is(4));
             assertThat(result.get(0).getTo(), is(2));
             assertThat(result.get(1).getFrom(), is(2));
-            assertThat(result.get(1).getTo(), is(4));
+            assertThat(result.get(1).getTo(), is(0));
+            assertThat(result.get(2).getFrom(), is(0));
+            assertThat(result.get(2).getTo(), is(3));
+            assertThat(result.get(3).getFrom(), is(3));
+            assertThat(result.get(3).getTo(), is(1));
         }
 
         @Test
@@ -244,9 +220,15 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
-            assertThat(result.get(0).getFrom(), is(1));
-            assertThat(result.get(0).getTo(), is(3));
+            assertThat(result.size(), is(4));
+            assertThat(result.get(0).getFrom(), is(3));
+            assertThat(result.get(0).getTo(), is(1));
+            assertThat(result.get(1).getFrom(), is(1));
+            assertThat(result.get(1).getTo(), is(4));
+            assertThat(result.get(2).getFrom(), is(4));
+            assertThat(result.get(2).getTo(), is(2));
+            assertThat(result.get(3).getFrom(), is(2));
+            assertThat(result.get(3).getTo(), is(0));
         }
 
         @Test
@@ -259,9 +241,19 @@ class IntervalsCalculatorTest {
             List<Interval> result = intervalsCalculator.calculate(inputArray);
 
             //then
-            assertThat(result.size(), is(1));
-            assertThat(result.get(0).getFrom(), is(1));
-            assertThat(result.get(0).getTo(), is(3));
+            assertThat(result.size(), is(6));
+            assertThat(result.get(0).getFrom(), is(3));
+            assertThat(result.get(0).getTo(), is(1));
+            assertThat(result.get(1).getFrom(), is(1));
+            assertThat(result.get(1).getTo(), is(6));
+            assertThat(result.get(2).getFrom(), is(6));
+            assertThat(result.get(2).getTo(), is(5));
+            assertThat(result.get(3).getFrom(), is(5));
+            assertThat(result.get(3).getTo(), is(4));
+            assertThat(result.get(4).getFrom(), is(4));
+            assertThat(result.get(4).getTo(), is(2));
+            assertThat(result.get(5).getFrom(), is(2));
+            assertThat(result.get(5).getTo(), is(0));
         }
     }
 

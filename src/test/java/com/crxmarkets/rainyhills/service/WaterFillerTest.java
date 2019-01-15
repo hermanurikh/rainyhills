@@ -164,13 +164,13 @@ class WaterFillerTest {
         }
     }
 
-    @DisplayName("operates correctly on invalid intervals")
+    @DisplayName("operates correctly on strange intervals")
     @Nested
-    class InvalidIntervalsTest {
+    class StrangeIntervalsTest {
 
         @Test
-        @DisplayName("throws exception on interleaving intervals")
-        void fillWater_fail_interleavingIntervals() {
+        @DisplayName("allows interleaving intervals")
+        void fillWater_success_interleavingIntervals() {
             //given
             int[] inputArray = {4, 0, 2, 1, 5};
             List<Interval> intervals = ImmutableList.of(
@@ -179,26 +179,42 @@ class WaterFillerTest {
             );
 
             //when
+            RainResult rainResult = waterFiller.fillWater(inputArray, intervals);
+
             //then
-            assertThrows(ValidationException.class,
-                    () -> waterFiller.fillWater(inputArray, intervals),
-                    "interleaving of intervals should not happen, but index 1 is already filled");
+            long[] waterToFill = rainResult.getWaterToFill();
+            assertThat(rainResult.getSourceArray(), is(inputArray));
+            assertThat(rainResult.getVolume(), is(9L));
+
+            assertThat(waterToFill[0], is(0L));
+            assertThat(waterToFill[1], is(4L));
+            assertThat(waterToFill[2], is(2L));
+            assertThat(waterToFill[3], is(3L));
+            assertThat(waterToFill[4], is(0L));
         }
 
         @Test
-        @DisplayName("throws exception when interval is incorrect")
+        @DisplayName("allows peak in center of interval")
         void fillWater_fail_intervalIsIncorrect() {
             //given
             int[] inputArray = {4, 5, 2, 1, 5};
             List<Interval> intervals = ImmutableList.of(
-                    new Interval(0, 2)
+                    new Interval(0, 4)
             );
 
             //when
+            RainResult rainResult = waterFiller.fillWater(inputArray, intervals);
+
             //then
-            assertThrows(ValidationException.class,
-                    () -> waterFiller.fillWater(inputArray, intervals),
-                    "water delta should not be below zero: for index 1 level to fill is 2 with current value 5");
+            long[] waterToFill = rainResult.getWaterToFill();
+            assertThat(rainResult.getSourceArray(), is(inputArray));
+            assertThat(rainResult.getVolume(), is(5L));
+
+            assertThat(waterToFill[0], is(0L));
+            assertThat(waterToFill[1], is(0L));
+            assertThat(waterToFill[2], is(2L));
+            assertThat(waterToFill[3], is(3L));
+            assertThat(waterToFill[4], is(0L));
         }
     }
 

@@ -8,18 +8,15 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static java.lang.String.format;
-
 @Component
 class WaterFiller {
 
     /**
      * Fills the water.
+     * Intervals can be directed both ways, that is why there is a swap.
+     * Interleaving is allowed, one interval can interleave another one.
      *
-     * This method could be made concurrent, but performance tests show that there is literally no difference
-     * between filling an array of one million and ten millions - the bottleneck is in intervalsCalculator which
-     * is quite complex to split.
-     * @param sourceArray input array
+     * @param sourceArray     input array
      * @param intervalsToFill intervals to fill
      * @return result of filling
      */
@@ -31,20 +28,36 @@ class WaterFiller {
         AtomicLong totalVolume = new AtomicLong();
 
         intervalsToFill.forEach(interval -> {
-            int left = sourceArray[interval.getFrom()];
-            int right = sourceArray[interval.getTo()];
+            int from = interval.getFrom();
+            int to = interval.getTo();
+
+            int left = sourceArray[from];
+            int right = sourceArray[to];
+
+            if (from > to) {
+                //intervals can be bi-directed
+                from = from ^ to;
+                to = from ^ to;
+                from = from ^ to;
+            }
 
             int levelToFill = getLevelToFill(left, right);
 
-            for (int i = interval.getFrom() + 1; i < interval.getTo(); i++) {
-                validateNoInterleaving(waterToFill, i);
+            for (int i = from + 1; i < to; i++) {
 
                 long waterDelta = ((long) levelToFill) - sourceArray[i];
+                //the peak may be higher than to or from, so 0 then
+                long realWaterDelta = waterDelta >= 0 ? waterDelta : 0;
 
-                validateWaterDelta(waterDelta, i, levelToFill, sourceArray[i]);
-
-                waterToFill[i] = waterDelta;
-                totalVolume.addAndGet(waterDelta);
+                //we may have already filled with something, so fill higher only if needed
+                if (realWaterDelta > waterToFill[i]) {
+                    //previous filling was incorrect, remove it
+                    totalVolume.addAndGet(-waterToFill[i]);
+                    //fill with new one
+                    waterToFill[i] = realWaterDelta;
+                    //and count it
+                    totalVolume.addAndGet(realWaterDelta);
+                }
             }
         });
 
@@ -62,22 +75,6 @@ class WaterFiller {
 
         if (intervalsToFill == null) {
             throw new ValidationException("intervals to fill water should not be null");
-        }
-    }
-
-    private void validateNoInterleaving(long[] waterToFill, int i) {
-        if (waterToFill[i] != 0) {
-            throw new ValidationException(
-                    format("interleaving of intervals should not happen, but index %d is already filled", i));
-        }
-    }
-
-    private void validateWaterDelta(long waterDelta, int index, int levelToFill, int originalValue) {
-        if (waterDelta < 0) {
-            throw new ValidationException(
-                    format("water delta should not be below zero: for index %d level to fill is %d with current value %d",
-                            index, levelToFill, originalValue)
-            );
         }
     }
 
