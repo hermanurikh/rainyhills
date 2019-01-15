@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Parsing result</title>
+    <div lang="en" th:replace="fragments/header :: header"></div>
+    <div lang="en" th:replace="fragments/visualisation :: visualisation"></div>
+
+    <script th:inline="javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            if (visualisationPossible([[${rainResult.sourceArray}]])) {
+                visualiseRain([[${rainResult.sourceArray}]], [[${rainResult.waterToFill}]]);
+            } else {
+                showNoVisualisationMessage();
+            }
+        });
+    </script>
+
 </head>
 <body>
-<h1>successfully parsed
-    [[${rainResult.volume}]]</h1>
+<div class="jumbotron text-center">
+    <p>Here is the parsing result.</p>
+</div>
 
-<div lang="en" th:replace="fragments/footer :: footer"> </div>
+<div class="container">
+    <h1 id="water-volume">Total water volume is [[${rainResult.volume}]].</h1>
+
+
+</div>
+
+<div class="container">
+    <div lang="en" th:replace="fragments/footer :: footer"></div>
+
+</div>
 
 </body>
 </html>

@@ -155,6 +155,25 @@ class IntervalsCalculatorTest {
             //then
             assertThat(result.size(), is(0));
         }
+
+        @Test
+        @DisplayName("when array has similar peaks in the end")
+        void calculate_success_arrayHasSimilarInEnd() {
+            //given
+            int[] inputArray = {1, 3, 4, 2, 6, 7, 9, 10, 0, 5, 4, 5};
+
+            //when
+            List<Interval> result = intervalsCalculator.calculate(inputArray);
+
+            //then
+            assertThat(result.size(), is(3));
+            assertThat(result.get(0).getFrom(), is(2));
+            assertThat(result.get(0).getTo(), is(4));
+            assertThat(result.get(1).getFrom(), is(7));
+            assertThat(result.get(1).getTo(), is(9));
+            assertThat(result.get(2).getFrom(), is(9));
+            assertThat(result.get(2).getTo(), is(11));
+        }
     }
 
     @Nested
