@@ -36,6 +36,8 @@ public class RainyHillsSolver {
             String csvFileString = bufferedReader
                     .lines().collect(Collectors.joining("\n"));
 
+            LOGGER.info("Raw file contents: " + csvFileString);
+
             inputArray = Arrays.stream(csvFileString.split(","))
                     .map(Integer::parseInt)
                     .mapToInt(x -> x)

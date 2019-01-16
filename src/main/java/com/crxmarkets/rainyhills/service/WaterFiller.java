@@ -7,9 +7,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.logging.Logger;
 
 @Component
 class WaterFiller {
+
+    private static final Logger LOGGER = Logger.getLogger("WaterFiller");
 
     /**
      * Fills the water.
@@ -51,6 +54,11 @@ class WaterFiller {
 
                 //we may have already filled with something, so fill higher only if needed
                 if (realWaterDelta > waterToFill[i]) {
+
+                    LOGGER.info(String.format(
+                            "Adding %s units of water for interval %s, index is %d",
+                            realWaterDelta, interval, i));
+
                     //previous filling was incorrect, remove it
                     totalVolume.addAndGet(-waterToFill[i]);
                     //fill with new one

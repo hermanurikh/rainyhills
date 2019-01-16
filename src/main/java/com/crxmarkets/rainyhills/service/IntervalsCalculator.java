@@ -9,11 +9,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import static java.util.Collections.emptyList;
 
 @Component
 class IntervalsCalculator {
+
+    private static final Logger LOGGER = Logger.getLogger("IntervalsCalculator");
+
     /**
      * Return the list of intervals to be later filled with water.
      *
@@ -22,6 +26,9 @@ class IntervalsCalculator {
      */
     List<Interval> calculate(int[] array) {
         checkNotNull(array);
+
+        LOGGER.info("Calculating intervals for array: " + Arrays.toString(array));
+
         if (array.length == 0) {
             return emptyList();
         }
@@ -39,6 +46,8 @@ class IntervalsCalculator {
         for (int i = edges.length - 1; i > 0; i--) {
             intervals.add(new Interval(edges[i].originalIndex, edges[i - 1].originalIndex));
         }
+
+        LOGGER.info("Result intervals: " + intervals);
 
         //resulting intervals are in the order from highest to next highest and so on
         return intervals;
