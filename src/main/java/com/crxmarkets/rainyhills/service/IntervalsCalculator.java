@@ -21,6 +21,9 @@ class IntervalsCalculator {
     /**
      * Return the list of intervals to be later filled with water.
      *
+     * The algorithm is to sort the peaks, then simply create intervals from highest to next highest while remembering the indices.
+     * {@code WaterFiller.java} will figure out whether to fill a unit between given interval.
+     *
      * @param array input array, not null
      * @return a list of intervals
      */

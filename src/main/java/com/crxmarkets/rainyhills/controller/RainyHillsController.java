@@ -26,7 +26,6 @@ public class RainyHillsController {
         RainResult rainResult = rainyHillsSolver.rain(csvFile);
 
         return setAndReturnResult(modelMap, rainResult);
-        //todo add logging everywhere
     }
 
     @GetMapping("/rainWithTask1")
