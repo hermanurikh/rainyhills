@@ -51,5 +51,5 @@ function visualisationPossible(groundArray) {
 }
 
 function showNoVisualisationMessage() {
-    alert('no visualisation for you');
+    document.getElementById('noVisualisationWarning').style.display = 'block';
 }
