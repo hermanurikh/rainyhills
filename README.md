@@ -29,7 +29,7 @@ The task is implemented with visualisation if array.length is <= 12 and if input
 
 <h3>Result with visualisation</h3>
 
-![result_visualisation](https://user-images.githubusercontent.com/8960532/51268540-6c755980-19d1-11e9-9712-e14918b20f0c.JPG)
+![result_visualisation](https://user-images.githubusercontent.com/8960532/51268891-1a810380-19d2-11e9-9cf3-3234c0f85e99.JPG)
 
 <h3>Result without visualisation</h3>
 
